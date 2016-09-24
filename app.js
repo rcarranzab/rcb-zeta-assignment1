@@ -3,12 +3,13 @@
 
   angular.module('LunchCheck', [])
   .controller('LunchCheckController', LunchCheckController);
-  
+
   LunchCheckController.$inject = ['$scope'];
 
   function LunchCheckController($scope) {
 
     var messages = ['Please enter data first...', 'Enjoy!!!', 'Too much!!!'];
+    //var regEx = new RegExp('/^\s+$/');
 
     $scope.checkForLunch = function () {
       $scope.message = getMessage();
@@ -29,7 +30,7 @@
 
     var getLunchSize = function () {
       if(isLunchValid()) {
-        return validateArray($scope.lunch.trim().split(','));
+        return validateArray($scope.lunch.split(','));
       } else {
         return 0;
       }
@@ -38,7 +39,8 @@
     var validateArray = function (lunchArray) {
       var validatedArray = [];
       for(var i = 0; i < lunchArray.length; i++) {
-        if(lunchArray[i] !== '') {
+        if(lunchArray[i].trim() !== '') {
+        //if(!regEx.test(lunchArray[i])) {
           validatedArray.push(lunchArray[i]);
         }
       }
